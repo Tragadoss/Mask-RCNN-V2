@@ -5,6 +5,7 @@ import keras
 import tensorflow as tf
 import nibabel as nib
 import cv2
+from keras.callbacks import CSVLogger
 # DEFINE seg-areas  
 SEGMENT_CLASSES = {
     0 : 'NOT tumor',
@@ -95,3 +96,16 @@ train_ids, test_ids = train_test_split(train_test_ids,test_size=0.15)
 training_generator = DataGenerator(train_ids)
 valid_generator = DataGenerator(val_ids)
 test_generator = DataGenerator(test_ids)
+
+csv_logger = CSVLogger('training.log', separator=',', append=False)
+
+
+callbacks = [
+    keras.callbacks.EarlyStopping(monitor='loss', min_delta=0,patience=2,
+                                  verbose=1, mode='auto'),
+    keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2,
+                              patience=2, min_lr=0.000001, verbose=1),
+    keras.callbacks.ModelCheckpoint(filepath = 'model_.{epoch:02d}-{val_loss:.6f}.m5',
+                              verbose=1, save_best_only=True, save_weights_only = True),
+        csv_logger
+    ]
