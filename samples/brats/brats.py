@@ -6,6 +6,7 @@ import tensorflow as tf
 import nibabel as nib
 import cv2
 from keras.callbacks import CSVLogger
+from keras.layers import Input
 # DEFINE seg-areas  
 SEGMENT_CLASSES = {
     0 : 'NOT tumor',
@@ -109,3 +110,8 @@ callbacks = [
                               verbose=1, save_best_only=True, save_weights_only = True),
         csv_logger
     ]
+'''
+input form specification
+to call model we need to call datageneration class
+input_layer = Input((IMG_SIZE, IMG_SIZE, 2))
+'''
