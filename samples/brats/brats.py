@@ -57,12 +57,12 @@ class DataGenerator(keras.utils.Sequence):
             np.random.shuffle(self.indexes)
 
     def __data_generation(self, Batch_ids): 
-        'Generates data containing batch_size samples' # X : (n_samples, *dim, n_channels)
+        # Generates data containing batch_size samples X : (n_samples, *dim, n_channels)
         # Initialization
         X = np.zeros((self.batch_size*VOLUME_SLICES, *self.dim, self.n_channels))
         y = np.zeros((self.batch_size*VOLUME_SLICES, 240, 240))
         Y = np.zeros((self.batch_size*VOLUME_SLICES, *self.dim, 4))
-         # Generate data
+        # Generate data
         for c, i in enumerate(Batch_ids):
             case_path = os.path.join(TRAIN_DATASET_PATH, i)
             data_path = os.path.join(case_path, f'flaire{i}.nii')
