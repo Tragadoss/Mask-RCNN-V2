@@ -87,7 +87,7 @@ class DataGenerator(keras.utils.Sequence):
         mask = tf.one_hot(y, 4)
         Y = tf.image.resize(mask, (IMG_SIZE, IMG_SIZE))
         return X/np.max(X), Y
-
+#--------------------------------------------------------------------------------------------------------------
 TRAIN_DATASET_PATH=""
 # lists of directories with studies
 train_and_val_directories = [f.path for f in os.scandir(TRAIN_DATASET_PATH) if f.is_dir()]
@@ -99,7 +99,6 @@ valid_generator = DataGenerator(val_ids)
 test_generator = DataGenerator(test_ids)
 
 csv_logger = CSVLogger('training.log', separator=',', append=False)
-
 
 callbacks = [
     keras.callbacks.EarlyStopping(monitor='loss', min_delta=0,patience=2,
