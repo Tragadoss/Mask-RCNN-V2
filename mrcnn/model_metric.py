@@ -1,6 +1,5 @@
-# ml libs
-import keras
-import keras.backend as K
+import tensorflow.keras as keras
+import tensorflow.keras.backend as K
 # dice loss as defined above for 4 classes
 def dice_coef(y_true, y_pred):
     class_num = 4
